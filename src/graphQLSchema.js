@@ -16,23 +16,44 @@ import {
 	driverTypeDef
 } from './buses/typeDefs';
 
+import { 
+	stationMutations,
+	stationQueries,
+	stationTypeDef
+} from './stations/typeDefs';
+
+import { 
+	routeMutations,
+	routeQueries,
+	routeTypeDef
+} from './routes/typeDefs';
+
+
 import driverResolvers from './buses/resolvers';
 import tripResolvers from './trips/resolvers';
+import stationResolvers from './stations/resolvers';
+import routeResolvers from './routes/resolvers';
 
 // merge the typeDefs
 const mergedTypeDefs = mergeSchemas(
 	[
 		'scalar JSON',
 		tripTypeDef,
-		driverTypeDef
+		driverTypeDef,
+		stationTypeDef,
+		routeTypeDef
 	],
 	[
 		tripQueries,
-		driverQueries
+		driverQueries,
+		stationQueries,
+		routeQueries
 	],
 	[
 		tripMutations,
-		driverMutations
+		driverMutations,
+		stationMutations,
+		routeMutations
 	]
 );
 
@@ -42,6 +63,8 @@ export default makeExecutableSchema({
 	resolvers: merge(
 		{ JSON: GraphQLJSON }, // allows scalar JSON
 		driverResolvers,
-		tripResolvers
+		tripResolvers,
+		stationResolvers,
+		routeResolvers
 	)
 });
